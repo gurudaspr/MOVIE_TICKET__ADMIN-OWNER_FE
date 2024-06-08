@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+* {
+    transition-property: background-color;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+}
+
+*{
+    font-family: sans-serif
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color); 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color); 
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover-color); 
+}
+
+
+[data-theme='light'] ::-webkit-scrollbar-thumb {
+    background: #dbd1d4;
+}
+
+[data-theme='light'] ::-webkit-scrollbar-thumb:hover {
+    background: #cfd8dc;
+}
+
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+    background: #171f26;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+    background: #171f26;
+}
