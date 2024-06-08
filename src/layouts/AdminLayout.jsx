@@ -3,6 +3,7 @@ import AdminNavbar from '../components/admin/AdminNavbar';
 import { Outlet } from 'react-router-dom';
 import LeftSidebar from '../components/admin/LeftSidebar';
 import Content from '../components/admin/Content';
+import Footer from '../components/footer/Footer';
 
 const AdminLayout = () => {
   return (
@@ -14,12 +15,12 @@ const AdminLayout = () => {
         <div className="flex flex-col flex-1 w-full">
           <AdminNavbar />
           <Outlet />
+          <Footer />
+          
         </div>
-        
-        
-        
-        
+       
       </div>
+      
     </>
   );
 };
