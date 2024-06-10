@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+import { HiX } from "react-icons/hi";
 
 const links = [
   { name: 'Dashboard', path: '/adminDashboard' },
@@ -21,7 +21,7 @@ function LeftSidebar() {
             <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
             <ul className="menu pt-2 w-80 bg-base-200 min-h-full text-base-content">
                 <button className="btn btn-ghost bg-base-300 btn-circle z-50 top-0 right-0 mt-4 mr-2 absolute lg:hidden" onClick={close}>
-                    <XMarkIcon className="h-5 inline-block w-5" />
+                    <HiX className="h-5 inline-block w-5" />
                 </button>
                 <li className="mb-2 font-semibold text-xl">
                     <Link to="/">

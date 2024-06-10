@@ -2,7 +2,7 @@ import React from 'react';
 import AdminNavbar from '../components/admin/AdminNavbar';
 import { Outlet } from 'react-router-dom';
 import LeftSidebar from '../components/admin/LeftSidebar';
-import Content from '../components/admin/Content';
+import Content from '../pages/admin/Content';
 import Footer from '../components/footer/Footer';
 
 const AdminLayout = () => {
@@ -14,7 +14,8 @@ const AdminLayout = () => {
         <LeftSidebar />
         <div className="flex flex-col flex-1 w-full">
           <AdminNavbar />
-          <Outlet />
+          {/* <Outlet /> */}
+          <Content />
           <Footer />
           
         </div>

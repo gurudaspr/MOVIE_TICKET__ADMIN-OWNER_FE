@@ -4,10 +4,10 @@ import HomeLayout from "../layouts/HomeLayout";
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
 import AdminDashboard from "../components/admin/AdminDashboard";
-import Transactions from "../components/admin/TransactionList";
-import UserList from "../components/admin/UserList";
-import TheaterList from "../components/admin/TheaterList";
-import MoviesList from "../components/admin/MoviesList";
+import Transactions from '../pages/admin/TransactionPage'
+import UserList from "../pages/admin/UserPage";
+import TheaterList from "../pages/admin/TheaterPage";
+import MoviesList from "../pages/admin/MoviePage";
 
 
 export const routes = [
