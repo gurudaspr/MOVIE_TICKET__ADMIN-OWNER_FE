@@ -25,7 +25,7 @@ export default function AdminNavbar() {
             </svg>
                 </button>
             <div className="flex-1">
-                <h1 className="text-2xl font-semibold ml-2 hidden lg:block">{pageTitle}</h1>
+                <h1 className="text-lg lg:text-2xl font-semibold ml-2 ">{pageTitle}</h1>
             </div>
             </div>
             <div className="navbar-end gap-3">

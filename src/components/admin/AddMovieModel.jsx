@@ -19,8 +19,8 @@ const movieSchema = Yup.object().shape({
   releaseDate: Yup.date().required('Release date is required'),
 });
 
-export default function AddEditModel({ isOpen, onClose, }) {
-  const { register, handleSubmit,control, formState: { errors }, reset } = useForm({
+export default function AddEditModel({ isOpen, onClose }) {
+  const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(movieSchema),
   });
 
@@ -30,14 +30,14 @@ export default function AddEditModel({ isOpen, onClose, }) {
     console.log(data, 'Movie Data');
     try {
       setLoading(true);
-       const formData = new FormData();
+      const formData = new FormData();
       formData.append('title', data.title);
       formData.append('genre', data.genre);
       formData.append('language', data.language);
       formData.append('duration', data.duration);
       formData.append('description', data.description);
       formData.append('releaseDate', format(new Date(data.releaseDate), 'yyyy-MM-dd'));
-      formData.append('image', data.image[0])
+      formData.append('image', data.image[0]);
 
       await axios.post(`${baseUrl}/api/admin/add-movie`, formData, {
         headers: {
@@ -45,7 +45,6 @@ export default function AddEditModel({ isOpen, onClose, }) {
         },
         withCredentials: true,
       });
-
 
       toast.success('Movie added successfully');
       reset();
@@ -57,10 +56,12 @@ export default function AddEditModel({ isOpen, onClose, }) {
       setLoading(false);
     }
   };
+
   const handleClose = () => {
     reset();
     onClose();
   };
+
   return (
     <>
       <div className={`modal ${isOpen ? 'modal-open ' : ''}`}>
@@ -98,10 +99,10 @@ export default function AddEditModel({ isOpen, onClose, }) {
                   </span>
                 )}
               </div>
-              <div className='flex'>
-                <div className="my-3 text-center w-[50%] px-2">
-                  <label htmlFor="duration" className="block text-left  text-sm mb-2 font-medium">Duration(Minutes)</label>
-                  <input type="number" placeholder="Duration(Minutes)" className="input input-bordered input-primary w-full "
+              <div className='flex flex-col md:flex-row'>
+                <div className="my-3 text-center w-full md:w-1/2 px-2">
+                  <label htmlFor="duration" className="block text-left text-sm mb-2 font-medium">Duration (Minutes)</label>
+                  <input type="number" placeholder="Duration (Minutes)" className="input input-bordered input-primary w-full"
                     {...register("duration")} />
                   {errors.duration && (
                     <span className="text-left text-error block text-sm mt-1 ml-2">
@@ -109,8 +110,8 @@ export default function AddEditModel({ isOpen, onClose, }) {
                     </span>
                   )}
                 </div>
-                <div className="my-3 text-center w-[50%] px-2">
-                  <label htmlFor="releaseDate" className="block text-left  text-sm mb-2 font-medium">Release Date</label>
+                <div className="my-3 text-center w-full md:w-1/2 px-2">
+                  <label htmlFor="releaseDate" className="block text-left text-sm mb-2 font-medium">Release Date</label>
                   <Controller
                     control={control}
                     name="releaseDate"
@@ -122,6 +123,7 @@ export default function AddEditModel({ isOpen, onClose, }) {
                         dateFormat="yyyy/MM/dd"
                         placeholderText="Select release date"
                         className="input input-bordered input-primary w-full"
+                        wrapperClassName="w-full" 
                       />
                     )}
                   />
@@ -163,9 +165,9 @@ export default function AddEditModel({ isOpen, onClose, }) {
             </div>
           </form>
 
-            <div className="modal-action">
+          <div className="modal-action">
             <button className="btn" onClick={handleClose}>Cancel</button>
-           </div>
+          </div>
         </div>
       </div>
     </>
