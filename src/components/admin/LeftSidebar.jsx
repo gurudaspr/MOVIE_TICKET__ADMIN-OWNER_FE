@@ -24,10 +24,6 @@ function LeftSidebar() {
   const [openMenus, setOpenMenus] = useState({});
   const setPageTitle = useSetRecoilState(pageTitleState);
 
-  const close = () => {
-    document.getElementById('left-sidebar-drawer').click();
-  };
-
   const toggleSubMenu = (index) => {
     setOpenMenus((prevState) => ({
       ...prevState,
@@ -42,10 +38,7 @@ function LeftSidebar() {
   return (
     <div className="drawer-side z-30">
       <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
-      <ul className="menu pt-2 w-80 bg-base-200 min-h-full text-base-content">
-        <button className="btn btn-ghost bg-base-300 btn-circle z-50 top-0 right-0 mt-4 mr-2 absolute lg:hidden" onClick={close}>
-          <HiX className="h-5 inline-block w-5" />
-        </button>
+      <ul className="menu pt-2 w-72 bg-base-200 min-h-full text-base-content">
         <li className="mb-2 font-semibold text-xl">
           <Link to="/">
             FilmGo

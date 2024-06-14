@@ -9,6 +9,10 @@ import UserList from "../pages/admin/UserPage";
 import MoviesList from "../pages/admin/MoviePage";
 import ApprovedTheaters from "../components/admin/ApprovedTheaters";
 import ApproveTheater from "../components/admin/ApproveTheater";
+import AdminRoutes from "../protectRoute/AdminRoutes";
+import OwnerRoutes from "../protectRoute/OwnerRoutes";
+import OwnerDashboard from "../components/owner/OwnerDashboard";
+import OwnerLayout from "../layouts/OwnerLayout";
 
 
 export const routes = [
@@ -35,28 +39,37 @@ export const routes = [
     children : [
       {
         path: "/adminDashboard",
-        element: <AdminDashboard />
+        element:<AdminRoutes><AdminDashboard /></AdminRoutes> 
       },
       {
         path: "/transactions",
-        element: <Transactions />
+        element: <AdminRoutes><Transactions /></AdminRoutes>
       },
       {
         path: "/users",
-        element: <UserList />
+        element:<AdminRoutes><UserList /></AdminRoutes>
       },
       {
         path: "/theaters/approved",
-        element: <ApprovedTheaters />
+        element: <AdminRoutes><ApprovedTheaters /></AdminRoutes>
       },
       {
         path: "/theater/pending-approval",
-        element: <ApproveTheater />
+        element: <AdminRoutes><ApproveTheater /></AdminRoutes>
       },
       {
         path: "/movies",
-        element: <MoviesList />
+        element: <AdminRoutes><MoviesList /></AdminRoutes>
       }
+    ]
+  },
+  {
+    element: <OwnerLayout />,
+    children : [
+      {
+        path: "/ownerDashboard",
+        element:<OwnerDashboard />
+      },
     ]
   }
 ];
