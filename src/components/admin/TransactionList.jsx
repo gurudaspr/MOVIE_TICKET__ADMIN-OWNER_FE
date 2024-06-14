@@ -40,6 +40,7 @@ const TransactionsList = () => {
                 <th>Payment Method</th>
                 <th>Amount</th>
                 <th>Transaction Date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -56,6 +57,21 @@ const TransactionsList = () => {
                   <td>{transaction.method}</td>
                   <td>{transaction.amount / 100} INR</td>
                   <td>{format(new Date(transaction.created_at * 1000), 'dd MMMM yyyy')}</td>
+                  <td>
+                    <span
+                      className={`badge badge-lg text-primary-content ${
+                        transaction.status === 'captured'
+                          ? 'bg-success'
+                          : transaction.status === 'created'
+                          ? 'bg-warning'
+                          : transaction.status === 'failed'
+                          ? 'bg-error'
+                          : 'bg-base-300'
+                      }`}
+                    >
+                      {transaction.status}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
