@@ -16,7 +16,7 @@ export default function MoviesList() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/api/all-movies`);
+        const res = await axios.get(`${baseUrl}/api/admin/all-movies`);
         setMovies(res.data);
       } catch (error) {
         console.log('Error fetching movies:', error.message);
@@ -34,7 +34,7 @@ export default function MoviesList() {
   const confirmDelete = async () => {
     if (deleteMovieId) {
       try {
-        await axios.delete(`${baseUrl}/api/delete-movie/${deleteMovieId}`);
+        await axios.delete(`${baseUrl}/api/admin/delete-movie/${deleteMovieId}`);
         setMovies(movies.filter(movie => movie._id !== deleteMovieId));
         toast.success('Movie deleted successfully');
       } catch (error) {
@@ -68,7 +68,7 @@ export default function MoviesList() {
 
         </div>
         <div className="divider mt-2"></div>
-        <div className="h-screen overflow-x-auto bg-base-200 rounded-xl">
+        <div className="h-full min-h-screen overflow-x-auto bg-base-200 rounded-xl">
           <table className="table">
             <thead className='text-lg'>
               <tr>
@@ -91,7 +91,7 @@ export default function MoviesList() {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{movie.title}</div>
+                        <p className="font-bold">{movie.title}</p>
                       </div>
                     </div>
                   </td>
@@ -113,6 +113,7 @@ export default function MoviesList() {
           </table>
         </div>
       </div>
+     
       <Modal
         isOpen={deleteMovieId !== null}
         onProceed={confirmDelete}

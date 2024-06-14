@@ -28,6 +28,7 @@ export default function Login() {
         try {
             setLoading(true);
             const res = await axios.post(`${baseUrl}/api/owner/signin`, data, { withCredentials: true, },);
+            console.log(res.data, 'res');
             console.log(res.data.role, 'data');
             const userRole = res.data.role;
             setUserRole(userRole); 

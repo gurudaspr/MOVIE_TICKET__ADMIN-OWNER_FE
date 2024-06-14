@@ -6,8 +6,9 @@ import SignupPage from "../pages/auth/SignupPage";
 import AdminDashboard from "../components/admin/AdminDashboard";
 import Transactions from '../pages/admin/TransactionPage'
 import UserList from "../pages/admin/UserPage";
-import TheaterList from "../pages/admin/TheaterPage";
 import MoviesList from "../pages/admin/MoviePage";
+import ApprovedTheaters from "../components/admin/ApprovedTheaters";
+import ApproveTheater from "../components/admin/ApproveTheater";
 
 
 export const routes = [
@@ -45,8 +46,12 @@ export const routes = [
         element: <UserList />
       },
       {
-        path: "/theaters",
-        element: <TheaterList />
+        path: "/theaters/approved",
+        element: <ApprovedTheaters />
+      },
+      {
+        path: "/theater/pending-approval",
+        element: <ApproveTheater />
       },
       {
         path: "/movies",

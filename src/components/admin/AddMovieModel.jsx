@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
-import { toast } from 'react-hot-toast'; 
+import { toast } from 'react-hot-toast';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns';
 
 const movieSchema = Yup.object().shape({
   title: Yup.string().required("Enter movie title"),
-  duration: Yup.number().required("Enter movie duration in minutes"),
+  duration: Yup.number().typeError("Duration must be a number").required("Enter movie duration in minutes"),
   genre: Yup.string().required("Enter movie genre"),
   description: Yup.string().required("Enter movie description").max(200),
   language: Yup.string().required("Enter movie language"),
-  image: Yup.string().required("Upload movie image"),
+  image: Yup.mixed().required("Upload movie image"),
+  releaseDate: Yup.date().required('Release date is required'),
 });
 
 export default function AddEditModel({ isOpen, onClose, }) {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit,control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(movieSchema),
   });
 
@@ -26,21 +30,18 @@ export default function AddEditModel({ isOpen, onClose, }) {
     console.log(data, 'Movie Data');
     try {
       setLoading(true);
-      const formData = new FormData();
+       const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('genre', data.genre);
+      formData.append('language', data.language);
+      formData.append('duration', data.duration);
+      formData.append('description', data.description);
+      formData.append('releaseDate', format(new Date(data.releaseDate), 'yyyy-MM-dd'));
+      formData.append('image', data.image[0])
 
-      Object.keys(data).forEach((key) => {
-        formData.append(key, data[key]);
-      });
-
-      const fileInput = document.getElementById("image");
-
-      if (fileInput && fileInput.files[0]) {
-        formData.append("image", fileInput.files[0]);
-      }
-  
-       await axios.post(`${baseUrl}/api/add-movie`, formData, {
+      await axios.post(`${baseUrl}/api/admin/add-movie`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', 
+          'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       });
@@ -97,15 +98,39 @@ export default function AddEditModel({ isOpen, onClose, }) {
                   </span>
                 )}
               </div>
-              <div className="my-3 text-center px-2">
-                <label htmlFor="duration" className="block text-left  text-sm mb-2 font-medium">Duration(Minutes)</label>
-                <input type="number" placeholder="Duration(Minutes)" className="input input-bordered input-primary w-full "
-                  {...register("duration")} />
-                {errors.duration && (
-                  <span className="text-left text-error block text-sm mt-1 ml-2">
-                    {errors.duration.message}
-                  </span>
-                )}
+              <div className='flex'>
+                <div className="my-3 text-center w-[50%] px-2">
+                  <label htmlFor="duration" className="block text-left  text-sm mb-2 font-medium">Duration(Minutes)</label>
+                  <input type="number" placeholder="Duration(Minutes)" className="input input-bordered input-primary w-full "
+                    {...register("duration")} />
+                  {errors.duration && (
+                    <span className="text-left text-error block text-sm mt-1 ml-2">
+                      {errors.duration.message}
+                    </span>
+                  )}
+                </div>
+                <div className="my-3 text-center w-[50%] px-2">
+                  <label htmlFor="releaseDate" className="block text-left  text-sm mb-2 font-medium">Release Date</label>
+                  <Controller
+                    control={control}
+                    name="releaseDate"
+                    render={({ field }) => (
+                      <DatePicker
+                        selected={field.value}
+                        onChange={(date) => field.onChange(date)}
+                        minDate={new Date()}
+                        dateFormat="yyyy/MM/dd"
+                        placeholderText="Select release date"
+                        className="input input-bordered input-primary w-full"
+                      />
+                    )}
+                  />
+                  {errors.releaseDate && (
+                    <span className="text-left text-error block text-sm mt-1 ml-2">
+                      {errors.releaseDate.message}
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="my-3 text-center px-2">
                 <label htmlFor="description" className="block text-left mb-2 text-sm font-medium ">Description</label>
@@ -124,21 +149,23 @@ export default function AddEditModel({ isOpen, onClose, }) {
               <div className="mb-3 text-center px-2">
                 <label htmlFor="image" className="block text-left mb-2 text-sm font-medium ">Image</label>
                 <input type="file" className="file-input file-input-bordered file-input-primary w-full"
-                   name='image' id="image" />
+                  name='image' id="image"
+                  {...register('image')} />
                 {errors.image && (
                   <span className="text-left text-error block text-sm mt-1 ml-2">
                     {errors.image.message}
                   </span>
                 )}
               </div>
-            </div>
-            <div className="text-center px-2 mt-2">
-            <button className="btn btn-primary" disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Submit"}</button>
+              <div className="text-center px-2 mt-2">
+                <button className="btn btn-primary" disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Add Movie"}</button>
+              </div>
             </div>
           </form>
-          <div className="modal-action">
+
+            <div className="modal-action">
             <button className="btn" onClick={handleClose}>Cancel</button>
-          </div>
+           </div>
         </div>
       </div>
     </>

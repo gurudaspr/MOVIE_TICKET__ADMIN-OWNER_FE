@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ToggleTheme from '../../ui/ToggleTheme';
+import axios from 'axios';
+import { baseUrl } from '../../baseUrl/baseUrl';
+import { useRecoilValue } from 'recoil';
+import { pageTitleState } from '../../store/usePageTitleAtom';
 
-function AdminNavbar() {
+export default function AdminNavbar() {
+    const pageTitle = useRecoilValue(pageTitleState);
     const openDrawer = () => {
         document.getElementById('left-sidebar-drawer').click();
     };
+
+    const handleLogout = () => {
+        axios.post(`${baseUrl}/api/owner/logout`,'', { withCredentials: true })
+    }
 
     return (
         <div className="navbar sticky top-0 bg-base-200 z-10">
@@ -16,16 +25,14 @@ function AdminNavbar() {
             </svg>
                 </button>
             <div className="flex-1">
-                <h1 className="text-2xl font-semibold ml-2 hidden lg:block">Page Title</h1>
+                <h1 className="text-2xl font-semibold ml-2 hidden lg:block">{pageTitle}</h1>
             </div>
             </div>
             <div className="navbar-end gap-3">
                 <ToggleTheme />
-                <Link to="/signup" className="btn bg-primary text-primary-content border-none hover:bg-primary-hover">LOGOUT</Link>
+                <Link to="/signup" onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover">LOGOUT</Link>
                 
             </div>
         </div>
     );
 }
-
-export default AdminNavbar;
