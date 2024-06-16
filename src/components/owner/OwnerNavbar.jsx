@@ -1,63 +1,38 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ToggleTheme from '../../ui/ToggleTheme';
 import axios from 'axios';
-import { baseUrl } from '../../baseUrl/baseUrl';;
-import toast from 'react-hot-toast';
+import { baseUrl } from '../../baseUrl/baseUrl';
+import { useRecoilValue } from 'recoil';
+import { pageTitleState } from '../../store/usePageTitleAtom';
 
 export default function OwnerNavbar() {
-    const navigate = useNavigate();
-    const links = [
-        { name: 'HOME', path: '/ownerDashboard' },
-        { name: 'THEATERS', path: '/theaters' },
-        { name: 'MOVIES', path: '/movie' },
-        { name: 'SHOWS', path: '/showtimes' }
-    ];
+    const pageTitle = useRecoilValue(pageTitleState);
+    const openDrawer = () => {
+        document.getElementById('left-sidebar-drawer').click();
+    };
 
     const handleLogout = () => {
-        try {
-            axios.post(`${baseUrl}/api/owner/logout`, '', { withCredentials: true })
-            toast.success('Logged out successfully');
-            navigate('/login', { replace: true });
-        } catch (error) {
-            console.error('Error logging out:', error);
-        }
-    };
+        axios.post(`${baseUrl}/api/owner/logout`,'', { withCredentials: true })
+    }
+
     return (
-        <div className="navbar bg-base-200 h-10 fixed z-50">
-          <div className="navbar-start">
-            <div className="dropdown ">
-              <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden ">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                </svg>
-              </div>
-              <ul tabIndex={0} className="menu menu-md dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52">
-                {links.map(link => (
-                  <li className='text-3xl' key={link.name}>
-                    <Link to={link.path}>{link.name}</Link>
-                  </li>
-                ))}
-              </ul>
+        <div className="navbar sticky top-0 bg-base-200 z-10">
+            <div className="navbar-start">
+            <button className="btn btn-ghost btn-circle lg:hidden" onClick={openDrawer}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            </svg>
+                </button>
+            <div className="flex-1">
+                <h1 className="text-lg lg:text-2xl font-semibold ml-2 ">{pageTitle}</h1>
             </div>
-            <Link to="/" className="btn btn-ghost text-xl">FilmGo</Link>
-          </div>
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              {links.map(link => (
-                <li key={link.name} className='text-lg'>
-                  <Link to={link.path}>{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-    
-          <div className="navbar-end gap-3">
-            <ToggleTheme />
-            {/* <Link  to='/logout' className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link> */}
-            <button onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT </button>
-          </div>
-    
+            </div>
+            <div className="navbar-end gap-3">
+                <ToggleTheme />
+                <Link to="/signup" onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover">LOGOUT</Link>
+                
+            </div>
         </div>
-      );
-    };
+    );
+}

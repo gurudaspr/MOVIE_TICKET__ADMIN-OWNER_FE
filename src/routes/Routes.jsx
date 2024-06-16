@@ -4,15 +4,19 @@ import HomeLayout from "../layouts/HomeLayout";
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
 import AdminDashboard from "../components/admin/AdminDashboard";
-import Transactions from '../pages/admin/TransactionPage'
-import UserList from "../pages/admin/UserPage";
-import MoviesList from "../pages/admin/MoviePage";
-import ApprovedTheaters from "../components/admin/ApprovedTheaters";
-import ApproveTheater from "../components/admin/ApproveTheater";
+
 import AdminRoutes from "../protectRoute/AdminRoutes";
 import OwnerRoutes from "../protectRoute/OwnerRoutes";
 import OwnerDashboard from "../components/owner/OwnerDashboard";
 import OwnerLayout from "../layouts/OwnerLayout";
+import AddTheaterPage from "../pages/owner/AddTheaterPage";
+import ManageTheaterPage from "../pages/owner/ManageTheaterPage";
+import MoviePage from "../pages/admin/MoviePage";
+import UserPage from "../pages/admin/UserPage";
+import TransactionPage from "../pages/admin/TransactionPage";
+import ApprovedTheatersPage from "../pages/admin/ApprovedTheatersPage";
+import ApproveTheaterPage from "../pages/admin/ApproveTheaterPage";
+import AllMoviePage from "../pages/owner/AllMoviePage";
 
 
 export const routes = [
@@ -43,23 +47,23 @@ export const routes = [
       },
       {
         path: "/transactions",
-        element: <AdminRoutes><Transactions /></AdminRoutes>
+        element: <AdminRoutes><TransactionPage /></AdminRoutes>
       },
       {
         path: "/users",
-        element:<AdminRoutes><UserList /></AdminRoutes>
+        element:<AdminRoutes><UserPage /></AdminRoutes>
       },
       {
         path: "/theaters/approved",
-        element: <AdminRoutes><ApprovedTheaters /></AdminRoutes>
+        element: <AdminRoutes><ApprovedTheatersPage /></AdminRoutes>
       },
       {
         path: "/theater/pending-approval",
-        element: <AdminRoutes><ApproveTheater /></AdminRoutes>
+        element: <AdminRoutes><ApproveTheaterPage /></AdminRoutes>
       },
       {
         path: "/movies",
-        element: <AdminRoutes><MoviesList /></AdminRoutes>
+        element: <AdminRoutes><MoviePage /></AdminRoutes>
       }
     ]
   },
@@ -70,6 +74,18 @@ export const routes = [
         path: "/ownerDashboard",
         element:<OwnerDashboard />
       },
+      {
+        path: "/movie-list",
+        element: <OwnerRoutes><AllMoviePage/></OwnerRoutes>
+      },
+      { path: "/theater/add",
+       element: <OwnerRoutes><AddTheaterPage/></OwnerRoutes> 
+      },
+      {
+        path: "/theaters/manage",
+        element: <OwnerRoutes><ManageTheaterPage/></OwnerRoutes>
+      }
+
     ]
   }
 ];

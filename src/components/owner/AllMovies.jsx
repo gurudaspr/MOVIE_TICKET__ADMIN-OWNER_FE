@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { baseUrl } from '../../baseUrl/baseUrl';
+import { format } from 'date-fns';
+import { toast } from 'react-hot-toast';
+import Modal from '../admin/ConfirmModel';
+import { FaEdit } from "react-icons/fa";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { Link } from 'react-router-dom';
+
+export default function AllMovies() {
+  const [movies, setMovies] = useState([]);
+  const [searchMovie, setSearchMovie] = useState('');
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await axios.get(`${baseUrl}/api/admin/all-movies`);
+        setMovies(res.data);
+      } catch (error) {
+        console.log('Error fetching movies:', error.message);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+  const filteredMovies = movies.filter(movie =>
+    movie.title.toLowerCase().includes(searchMovie.toLowerCase())
+  );
+
+
+  return (
+    <div className="container mx-auto my-8">
+      <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
+      <div className="card-title flex items-center justify-between">
+        <h2 className="text-xl font-semibold">Movies</h2>
+        <input className='input input-bordered input-sm  '
+        placeholder='Search Movie'
+          value={searchMovie}
+          onChange={e => setSearchMovie(e.target.value)}
+        />
+      </div>
+        <div className="divider mt-2"></div>
+        <div className="h-full min-h-screen overflow-x-auto bg-base-200 rounded-xl">
+          <table className="table">
+            <thead className='text-lg'>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Release Date</th>
+                <th>Language</th>
+                <th>Duration (Min)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredMovies.map((movie) => (
+                <tr key={movie._id} className='border-t border-base-100'>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={movie.image} alt={movie.title} className="object-cover" />
+                        </div>
+                      </div>
+                      <div>
+                        <p className="font-bold">{movie.title}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{movie.genre}</td>
+                  <td>{format(new Date(movie.releaseDate), 'dd MMMM yyyy')}</td>
+                  <td>{movie.language}</td>
+                  <td>{movie.duration} mins</td>
+                  <td>
+                    <Link   className="btn btn-success btn-sm text-primary-content" >
+                      Add Show
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>  
+    </div>
+  );
+}
