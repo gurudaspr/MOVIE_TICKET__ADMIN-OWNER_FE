@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function OwnerContent() {
   return (
-    <div className='w-full p-5  bg-base-100'>
+    <div className=' min-h-screen w-full p-5  bg-base-100'>
 
         <Outlet />
 

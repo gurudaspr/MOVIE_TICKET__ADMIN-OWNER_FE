@@ -16,6 +16,7 @@ import ApprovedTheatersPage from "../pages/admin/ApprovedTheatersPage";
 import ApproveTheaterPage from "../pages/admin/ApproveTheaterPage";
 import AllMoviePage from "../pages/owner/AllMoviePage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
+import AddShowPage from "../pages/owner/AddShowPage";
 
 
 export const routes = [
@@ -83,6 +84,10 @@ export const routes = [
       {
         path: "/theaters/manage",
         element: <OwnerRoutes><ManageTheaterPage/></OwnerRoutes>
+      },
+      {
+        path: "/shows",
+        element: <OwnerRoutes><AddShowPage/></OwnerRoutes>
       }
 
     ]

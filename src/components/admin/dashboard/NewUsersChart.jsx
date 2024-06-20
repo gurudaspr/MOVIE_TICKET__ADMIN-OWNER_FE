@@ -73,7 +73,7 @@ function NewUsersChart() {
   const year = currentDate.getFullYear();
   return (
     
-    <div className="rounded-lg shadow-lg  bg-base-300 text-neutral-content p-4">
+    <div className="rounded-lg shadow-lg  bg-base-300 lg:h-96 text-neutral-content p-4 animate-slide-in-left">
       <div className="card-title flex items-center justify-center">
           <h2 className="stat-title text-2xl  text-neutral-content ">NEW USERS {year}</h2>
           </div>

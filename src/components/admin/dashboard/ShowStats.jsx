@@ -22,7 +22,7 @@ export default function ShowStats() {
       fetchShows();
     }, []);
   return (
-    <div class="stats bg-base-300 text-center shadow  flex flex-col md:flex-row">
+    <div class="stats bg-base-300 text-center shadow  flex flex-col md:flex-row animate-slide-in-right">
          <div className="stat ">
       <div className="stat-title text-2xl  text-neutral-content">TOTAL SHOWS</div>
       <div className="stat-value text-success">

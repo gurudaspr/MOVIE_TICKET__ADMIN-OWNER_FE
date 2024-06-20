@@ -1,17 +1,18 @@
 import React from 'react'
 import NewUsersChart from './dashboard/NewUsersChart';
-import BookingStats from './dashboard/BookingStats';
+
 import UserStats from './dashboard/UserStats'
 import ReviewStats from './dashboard/ReviewStats';
 import TheaterStats from './dashboard/TheaterStats';
 import ShowStats from './dashboard/ShowStats';
 import MovieStats from './dashboard/MovieStats';
 import TransactionStats from './dashboard/TransactionStats';
+import BookingStats from './dashboard/BookingStats';
 
 
 export default function AdminDashboard() {
   return (
-    <div className='min-h-screen  mx-5 my-8 '>
+    <div className='min-h-screen  mx-5 my-8  animate-fade-in '>
       <div className="grid lg:grid-cols-3 md:grid-cols-3  sm:grid-cols-3 mt-4 grid-cols-1 gap-6 ">
         <UserStats />
         <TransactionStats />

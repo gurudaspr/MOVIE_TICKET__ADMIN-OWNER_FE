@@ -40,7 +40,7 @@ function LeftSidebar() {
       <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
       <ul className="menu pt-2 w-72 bg-base-200 min-h-full text-base-content">
         <li className="mb-2 font-semibold text-xl">
-          <Link to="/">
+          <Link to="/adminDashboard">
             FilmGo
           </Link>
         </li>
