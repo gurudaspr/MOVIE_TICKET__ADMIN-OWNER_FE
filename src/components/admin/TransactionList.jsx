@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { toast } from 'react-hot-toast';
+import { useRecoilState } from 'recoil';
 import { baseUrl } from '../../baseUrl/baseUrl';
+import { transactionListState } from '../../store/useTransactionState';
 
 const TransactionsList = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useRecoilState(transactionListState);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -20,7 +22,7 @@ const TransactionsList = () => {
     };
 
     fetchTransactions();
-  }, []);
+  }, [setTransactions]);
 
   return (
     <div className="container mx-auto my-8">
@@ -50,8 +52,8 @@ const TransactionsList = () => {
                     <div className=' w-auto h-12 flex items-center'>
                       <p className="font-bold">{transaction.id}</p>
                     </div>
-                     </td>
-                    <td>{transaction.notes && transaction.notes.customer_name}</td>
+                  </td>
+                  <td>{transaction.notes && transaction.notes.customer_name}</td>
                   <td>{transaction.email}</td>
                   <td>{transaction.contact}</td>
                   <td>{transaction.method}</td>

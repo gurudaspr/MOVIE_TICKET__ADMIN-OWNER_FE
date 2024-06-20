@@ -15,7 +15,7 @@ export default function TheaterStats() {
           setTotalApprovedTheaters(res.data.approvedTheater);
         setTotalPendingTheaters(res.data.pendingTheater);
         } catch (error) {
-          console.log('Error fetching total users:', error.message);
+          console.log('Error fetching total theaters:', error.message);
         }
       };
   

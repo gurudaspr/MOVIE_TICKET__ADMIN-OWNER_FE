@@ -12,7 +12,7 @@ export default function ReviewStats() {
         const res = await axios.get(`${baseUrl}/api/admin/total-reviews`, { withCredentials: true });
         setTotalReviews(res.data.totalReviews);
       } catch (error) {
-        console.log('Error fetching total users:', error.message);
+        console.log('Error fetching total reviews:', error.message);
       }
     };
 
