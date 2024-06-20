@@ -11,7 +11,7 @@ import TransactionStats from './dashboard/TransactionStats';
 
 export default function AdminDashboard() {
   return (
-    <div className='min-h-screen h-full  '>
+    <div className='min-h-screen  mx-5 my-8 '>
       <div className="grid lg:grid-cols-3 md:grid-cols-3  sm:grid-cols-3 mt-4 grid-cols-1 gap-6 ">
         <UserStats />
         <TransactionStats />

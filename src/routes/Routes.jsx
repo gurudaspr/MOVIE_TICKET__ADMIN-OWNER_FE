@@ -3,8 +3,6 @@ import AdminLayout from "../layouts/AdminLayout";
 import HomeLayout from "../layouts/HomeLayout";
 import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
-import AdminDashboard from "../components/admin/AdminDashboard";
-
 import AdminRoutes from "../protectRoute/AdminRoutes";
 import OwnerRoutes from "../protectRoute/OwnerRoutes";
 import OwnerDashboard from "../components/owner/OwnerDashboard";
@@ -17,6 +15,7 @@ import TransactionPage from "../pages/admin/TransactionPage";
 import ApprovedTheatersPage from "../pages/admin/ApprovedTheatersPage";
 import ApproveTheaterPage from "../pages/admin/ApproveTheaterPage";
 import AllMoviePage from "../pages/owner/AllMoviePage";
+import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
 
 
 export const routes = [
@@ -43,7 +42,7 @@ export const routes = [
     children : [
       {
         path: "/adminDashboard",
-        element:<AdminRoutes><AdminDashboard /></AdminRoutes> 
+        element:<AdminRoutes><AdminDashboardPage /></AdminRoutes> 
       },
       {
         path: "/transactions",
