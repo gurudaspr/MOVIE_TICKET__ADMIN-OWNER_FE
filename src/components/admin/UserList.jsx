@@ -11,7 +11,7 @@ export default function UserList() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/admin/all-users`);
+        const response = await axios.get(`${baseUrl}/api/admin/all-users`,{withCredentials:true});
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

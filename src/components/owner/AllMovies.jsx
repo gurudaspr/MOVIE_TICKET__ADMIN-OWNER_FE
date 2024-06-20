@@ -15,7 +15,7 @@ export default function AllMovies() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/api/admin/all-movies`);
+        const res = await axios.get(`${baseUrl}/api/admin/all-movies`,{withCredentials:true});
         setMovies(res.data);
       } catch (error) {
         console.log('Error fetching movies:', error.message);

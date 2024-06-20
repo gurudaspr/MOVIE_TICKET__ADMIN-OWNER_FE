@@ -11,7 +11,7 @@ export default function ApproveTheaters() {
     useEffect(() => {
         const fetchTheater = async () => {
             try {
-                const response = await axios.get(`${baseUrl}/api/admin/not-approved-theaters`);
+                const response = await axios.get(`${baseUrl}/api/admin/not-approved-theaters`,{withCredentials:true});
                 setTheaters(response.data);
             } catch (error) {
                 console.error('Error fetching theaters:', error);

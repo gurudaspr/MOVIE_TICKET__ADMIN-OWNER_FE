@@ -16,7 +16,7 @@ export default function MoviesList() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/api/admin/all-movies`);
+        const res = await axios.get(`${baseUrl}/api/admin/all-movies`,{withCredentials:true});
         setMovies(res.data);
       } catch (error) {
         console.log('Error fetching movies:', error.message);
@@ -34,7 +34,7 @@ export default function MoviesList() {
   const confirmDelete = async () => {
     if (deleteMovieId) {
       try {
-        await axios.delete(`${baseUrl}/api/admin/delete-movie/${deleteMovieId}`);
+        await axios.delete(`${baseUrl}/api/admin/delete-movie/${deleteMovieId}`,{withCredentials:true});
         setMovies(movies.filter(movie => movie._id !== deleteMovieId));
         toast.success('Movie deleted successfully');
       } catch (error) {

@@ -1,15 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { baseUrl } from '../../../baseUrl/baseUrl';
 import { Link } from 'react-router-dom';
+import CountUp from 'react-countup';
 
 export default function UserStats() {
   const [totalUsers, setTotalUsers] = useState(0);
 
-  useEffect(() => { 
+  useEffect(() => {
     const fetchTotalUsers = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/api/admin/total-users`);
+        const res = await axios.get(`${baseUrl}/api/admin/total-users`, { withCredentials: true });
         setTotalUsers(res.data.totalUsers);
       } catch (error) {
         console.log('Error fetching total users:', error.message);
@@ -20,16 +21,16 @@ export default function UserStats() {
   }, []);
 
   return (
-    <div className="stats bg-base-300 text-center  shadow ">
-    <div className="stat ">
-        <div className="stat-title text-2xl  text-neutral-content">TOTAL USERS</div>
-        <div className="stat-value">{totalUsers}</div>
-        <div className="stat-actions">
-            <Link to='/users' className="btn btn-xs btn-info text-primary-content">View Users</Link> 
+    <div className="stats bg-base-300 text-center shadow">
+      <div className="stat">
+        <div className="stat-title text-2xl text-neutral-content">TOTAL USERS</div>
+        <div className="stat-value">
+          <CountUp end={totalUsers} duration={1} />
         </div>
+        <div className="stat-actions">
+          <Link to='/users' className="btn  btn-sm btn-info text-primary-content">View</Link>
+        </div>
+      </div>
     </div>
-   
-    
-</div>
-  )
+  );
 }
