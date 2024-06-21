@@ -72,7 +72,7 @@ export const routes = [
     children : [
       {
         path: "/ownerDashboard",
-        element:<OwnerDashboard />
+        element:<OwnerRoutes><OwnerDashboard /></OwnerRoutes>
       },
       {
         path: "/movie-list",
