@@ -12,7 +12,7 @@ import BookingStats from './dashboard/BookingStats';
 
 export default function AdminDashboard() {
   return (
-    <div className='min-h-screen  mx-5 my-8  animate-fade-in '>
+    <div className='min-h-screen   mx-5 my-8  animate-fade-in '>
       <div className="grid lg:grid-cols-3 md:grid-cols-3  sm:grid-cols-3 mt-4 grid-cols-1 gap-6 ">
         <UserStats />
         <TransactionStats />
