@@ -81,6 +81,12 @@ const ShowList = () => {
             toast.error('Failed to refresh shows');
         }
     };
+    const clearFilters = () => {
+      setTheaterFilter('');
+      setDateFilter('');
+      setMovieSearch('');
+      setFilteredShows(shows);
+  };
 
     return (
         <div className="container mx-auto my-8">
@@ -120,8 +126,8 @@ const ShowList = () => {
                             value={dateFilter}
                             onChange={e => setDateFilter(e.target.value)}
                         />
-                        <button className="btn btn-info btn-sm text-primary-content" onClick={handleFilter}>
-                            Apply Filter
+                        <button className="btn btn-outline btn-sm " onClick={clearFilters} >
+                            Clear Filter
                         </button>
                     </div>
                 )}
