@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
-import { format } from 'date-fns';
+import { format, subHours, subMinutes } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import AddShowModel from './AddShowModel';
 
@@ -154,7 +154,7 @@ const ShowList = () => {
                                     </td>
                                     <td>{show.theaterName}</td>
                                     <td>{format(new Date(show.showDate), 'dd MMMM yyyy')}</td>
-                                    <td>{format(new Date(show.showDate), 'h:mm a')}</td>
+                                    <td>{format(subHours(subMinutes(new Date(show.showDate), 30), 5), 'h:mm aa')}</td>
                                     <td>{show.price}</td>
                                 </tr>
                             ))}
