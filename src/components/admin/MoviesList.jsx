@@ -6,17 +6,17 @@ import { toast } from 'react-hot-toast';
 import Modal from '../admin/ConfirmModel';
 import { FaEdit } from "react-icons/fa";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import AddMovieModel from './AddMovieModel';
+import AddEditModel from './AddMovieModel';
 
 export default function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [deleteMovieId, setDeleteMovieId] = useState(null);
   const [movieModel, setMovieModel] = useState(false);
-
+console.log(movies, 'Movies List');
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await axios.get(`${baseUrl}/api/admin/all-movies`,{withCredentials:true});
+        const res = await axios.get(`${baseUrl}/api/admin/all-movies`, { withCredentials: true });
         setMovies(res.data);
       } catch (error) {
         console.log('Error fetching movies:', error.message);
@@ -28,13 +28,13 @@ export default function MoviesList() {
 
   const handleDelete = (movieId) => {
     setDeleteMovieId(movieId);
-    console.log(movieId, 'Selected Movie ID for Deletion'); 
+    console.log(movieId, 'Selected Movie ID for Deletion');
   };
 
   const confirmDelete = async () => {
     if (deleteMovieId) {
       try {
-        await axios.delete(`${baseUrl}/api/admin/delete-movie/${deleteMovieId}`,{withCredentials:true});
+        await axios.delete(`${baseUrl}/api/admin/delete-movie/${deleteMovieId}`, { withCredentials: true });
         setMovies(movies.filter(movie => movie._id !== deleteMovieId));
         toast.success('Movie deleted successfully');
       } catch (error) {
@@ -58,14 +58,16 @@ export default function MoviesList() {
     setMovieModel(false);
   };
 
+  const addMovie = (newMovie) => {
+    setMovies((prevMovies) => [...prevMovies, newMovie]);
+  };
 
   return (
     <div className="container mx-auto my-8">
       <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
         <div className="card-title flex items-center justify-between">
           <h2 className="text-xl font-semibold">Movies</h2>
-          <button className="btn btn-success text-primary-content w-32" onClick={() => handleOpenModal()} >Add</button>
-
+          <button className="btn btn-success text-primary-content w-32" onClick={() => handleOpenModal()}>Add</button>
         </div>
         <div className="divider mt-2"></div>
         <div className="h-full min-h-screen overflow-x-auto bg-base-200 rounded-xl">
@@ -113,7 +115,7 @@ export default function MoviesList() {
           </table>
         </div>
       </div>
-     
+
       <Modal
         isOpen={deleteMovieId !== null}
         onProceed={confirmDelete}
@@ -121,10 +123,13 @@ export default function MoviesList() {
         title="Confirm Delete"
         description="Are you sure you want to delete this movie?"
       />
-      <AddMovieModel
+      <AddEditModel
         isOpen={movieModel}
         onClose={handleCloseModal}
+        addMovie={addMovie}
+
       />
+      
     </div>
   );
 }

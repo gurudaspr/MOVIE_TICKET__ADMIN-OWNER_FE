@@ -19,7 +19,7 @@ const movieSchema = Yup.object().shape({
   releaseDate: Yup.date().required('Release date is required'),
 });
 
-export default function AddEditModel({ isOpen, onClose }) {
+export default function AddEditModel({ isOpen, onClose, addMovie }) {
   const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
     resolver: yupResolver(movieSchema),
   });
@@ -39,7 +39,7 @@ export default function AddEditModel({ isOpen, onClose }) {
       formData.append('releaseDate', format(new Date(data.releaseDate), 'yyyy-MM-dd'));
       formData.append('image', data.image[0]);
 
-      await axios.post(`${baseUrl}/api/admin/add-movie`, formData, {
+      const response = await axios.post(`${baseUrl}/api/admin/add-movie`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -47,6 +47,8 @@ export default function AddEditModel({ isOpen, onClose }) {
       });
 
       toast.success('Movie added successfully');
+      console.log('Added movie:', response.data);
+      addMovie(response.data.movie);
       reset();
       onClose();
     } catch (error) {
@@ -123,7 +125,7 @@ export default function AddEditModel({ isOpen, onClose }) {
                         dateFormat="yyyy/MM/dd"
                         placeholderText="Select release date"
                         className="input input-bordered input-primary w-full"
-                        wrapperClassName="w-full" 
+                        wrapperClassName="w-full"
                       />
                     )}
                   />
