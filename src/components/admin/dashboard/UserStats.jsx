@@ -23,7 +23,7 @@ export default function UserStats() {
   return (
     <div className="stats bg-base-300 text-center shadow animate-slide-in-top">
       <div className="stat">
-        <div className="stat-title text-2xl text-neutral-content">TOTAL USERS</div>
+        <div className="stat-title text-neutral-content">TOTAL USERS</div>
         <div className="stat-value">
           <CountUp end={totalUsers} duration={1} />
         </div>

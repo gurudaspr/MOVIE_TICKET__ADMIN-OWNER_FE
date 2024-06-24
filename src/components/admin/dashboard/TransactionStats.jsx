@@ -32,7 +32,7 @@ export default function TransactionStats() {
   return (
     <div className="stats bg-base-300 text-center shadow animate-slide-in-top">
       <div className="stat">
-        <div className="stat-title text-2xl text-neutral-content">TOTAL AMOUNT</div>
+        <div className="stat-title text-neutral-content">TOTAL AMOUNT</div>
         <div className="stat-value text-success">
           ₹ {transactionData.loading ? <CountUp end={10000} duration={15} /> : <CountUp end={transactionData.totalAmount} duration={1} />}
         </div>

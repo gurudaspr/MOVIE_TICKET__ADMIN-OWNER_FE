@@ -24,14 +24,14 @@ export default function ShowStats() {
   return (
     <div class="stats bg-base-300 text-center shadow  flex flex-col md:flex-row animate-slide-in-right">
          <div className="stat ">
-      <div className="stat-title text-2xl  text-neutral-content">TOTAL SHOWS</div>
+      <div className="stat-title    text-neutral-content">TOTAL SHOWS</div>
       <div className="stat-value text-success">
         <CountUp end={totalShows} duration={1} /> </div>
       <div className="stat-actions">
       </div>
     </div>
     <div className="stat ">
-      <div className="stat-title text-2xl  text-neutral-content">UPCOMING SHOWS</div>
+      <div className="stat-title   text-neutral-content">UPCOMING SHOWS</div>
       <div className="stat-value text-warning ">
         <CountUp end={totalUpComingShows} duration={1} /> </div>
       <div className="stat-actions">

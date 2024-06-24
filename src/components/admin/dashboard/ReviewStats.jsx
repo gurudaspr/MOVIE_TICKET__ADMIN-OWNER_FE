@@ -22,7 +22,7 @@ export default function ReviewStats() {
   return (
     <div className="stats bg-base-300 text-center shadow animate-slide-in-bottom">
       <div className="stat">
-        <div className="stat-title text-2xl text-neutral-content">TOTAL REVIEWS</div>
+        <div className="stat-title   text-neutral-content">TOTAL REVIEWS</div>
         <div className="stat-value">
           <CountUp end={totalReviews} duration={1} />
         </div>

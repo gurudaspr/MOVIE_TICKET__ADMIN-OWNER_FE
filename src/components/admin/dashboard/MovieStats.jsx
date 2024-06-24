@@ -23,7 +23,7 @@ export default function MovieStats() {
   return (
     <div className="stats bg-base-300 text-center shadow animate-slide-in-bottom">
       <div className="stat">
-        <div className="stat-title text-2xl text-neutral-content">TOTAL MOVIES</div>
+        <div className="stat-title  text-neutral-content">TOTAL MOVIES</div>
         <div className="stat-value">
           <CountUp end={totalMovies} duration={1} />
         </div>

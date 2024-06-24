@@ -27,7 +27,7 @@ export default function BookingStats() {
    
     <div className="stats bg-base-300 text-center shadow animate-slide-in-top ">
     <div className="stat">
-      <div className="stat-title text-2xl  text-neutral-content">TOTAL BOOKINGS</div>
+      <div className="stat-title   text-neutral-content">TOTAL BOOKINGS</div>
       <div className="stat-value">
       {loading ? ( <CountUp end={100} duration={5} />) : (<CountUp end={totalBookings} duration={1} /> )} </div>
       <div className="stat-actions"></div>

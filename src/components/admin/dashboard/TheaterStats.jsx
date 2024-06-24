@@ -24,7 +24,7 @@ export default function TheaterStats() {
   return (
     <div class="stats bg-base-300 text-center shadow  flex flex-col md:flex-row animate-slide-in-right">
          <div className="stat ">
-      <div className="stat-title text-2xl  text-neutral-content">APPROVED THEATER</div>
+      <div className="stat-title   text-neutral-content">APPROVED THEATER</div>
       <div className="stat-value text-success">
         <CountUp end={totalApprovedTheaters} duration={1} /> </div>
       <div className="stat-actions">
@@ -32,7 +32,7 @@ export default function TheaterStats() {
       </div>
     </div>
     <div className="stat ">
-      <div className="stat-title text-2xl  text-neutral-content">PENDING THEATERS</div>
+      <div className="stat-title    text-neutral-content">PENDING THEATERS</div>
       <div className="stat-value text-warning ">
         <CountUp end={totalPendingTheaters} duration={1} /> </div>
       <div className="stat-actions">
