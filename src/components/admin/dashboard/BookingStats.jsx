@@ -25,7 +25,7 @@ export default function BookingStats() {
 
   return (
    
-    <div className="stats bg-base-300 text-center shadow animate-slide-in-top ">
+    <div className="stats bg-base-200 text-center shadow-lganimate-slide-in-top ">
     <div className="stat">
       <div className="stat-title   text-neutral-content">TOTAL BOOKINGS</div>
       <div className="stat-value">

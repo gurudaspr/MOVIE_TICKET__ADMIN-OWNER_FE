@@ -38,8 +38,8 @@ function OwnerSidebar() {
     <div className="drawer-side z-30">
       <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
       <ul className="menu pt-2 w-72 bg-base-200 min-h-full text-base-content">
-        <li className="mb-2 font-semibold text-xl">
-          <Link to="/">
+        <li className=" font-semibold text-xl">
+          <Link to="/"><img className="mask mask-squircle w-8 " src='/filmgo.png' alt=""/>
             FilmGo
           </Link>
         </li>

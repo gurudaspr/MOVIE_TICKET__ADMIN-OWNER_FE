@@ -21,7 +21,7 @@ export default function UserStats() {
   }, []);
 
   return (
-    <div className="stats bg-base-300 text-center shadow animate-slide-in-top">
+    <div className="stats bg-base-200  text-center shadow-lg animate-slide-in-top">
       <div className="stat">
         <div className="stat-title text-neutral-content">TOTAL USERS</div>
         <div className="stat-value">

@@ -39,8 +39,8 @@ function LeftSidebar() {
     <div className="drawer-side z-30">
       <label htmlFor="left-sidebar-drawer" className="drawer-overlay"></label>
       <ul className="menu pt-2 w-72 bg-base-200 min-h-full text-base-content">
-        <li className="mb-2 font-semibold text-xl">
-          <Link to="/adminDashboard">
+        <li className=" font-semibold text-xl">
+          <Link to="/adminDashboard"><img className="mask mask-squircle w-8 " src='/filmgo.png' alt=""/>
             FilmGo
           </Link>
         </li>
@@ -59,7 +59,9 @@ function LeftSidebar() {
                 {openMenus[index] && (
                   <ul className="ml-4">
                     {link.subLinks.map((subLink, subIndex) => (
+                      
                       <li key={`${index}-${subIndex}`}>
+                        
                         <NavLink
                           end
                           to={subLink.path}
@@ -77,6 +79,7 @@ function LeftSidebar() {
                 end
                 to={link.path}
                 onClick={() => handleLinkClick(link.name)}
+                
                 className={({ isActive }) => `${isActive ? 'font-semibold bg-base-200 text-lg' : 'font-normal text-lg'}`}
               >
                 {link.name}

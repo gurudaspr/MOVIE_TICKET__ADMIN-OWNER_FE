@@ -21,7 +21,7 @@ export default function MovieStats() {
   }, []);
 
   return (
-    <div className="stats bg-base-300 text-center shadow animate-slide-in-bottom">
+    <div className="stats bg-base-200 text-center shadow-lg animate-slide-in-bottom">
       <div className="stat">
         <div className="stat-title  text-neutral-content">TOTAL MOVIES</div>
         <div className="stat-value">
