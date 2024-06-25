@@ -12,7 +12,7 @@ const links = [
     name: 'Theater',
     subLinks: [
         { name: 'Add Theater', path: '/theater/add' },
-        { name: 'Manage Theater', path: '/theaters/manage' },
+        { name: 'My Theaters', path: '/theaters/my-theaters' },
     ]
   },
   { name : 'Shows', path: '/shows' },

@@ -97,7 +97,8 @@ const SeatingPatternGenerator = ({ rows, setRows, columns, setColumns, seatingPa
                         selectFromInside={false}
                         onSelect={handleSelect}
                     />
-                    <div className="seating-container">
+                    <h1 className='block md:hidden'>Please use desktop view for generating seats </h1>
+                    <div className="seating-container hidden md:block">
                         {seatingPattern.map((row, rowIndex) => (
                             <div key={rowIndex} className="row flex justify-center">
                                 {row.map((seat, seatIndex) => (

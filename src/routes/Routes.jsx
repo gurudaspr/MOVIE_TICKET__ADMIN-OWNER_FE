@@ -8,7 +8,6 @@ import OwnerRoutes from "../protectRoute/OwnerRoutes";
 import OwnerDashboard from "../components/owner/OwnerDashboard";
 import OwnerLayout from "../layouts/OwnerLayout";
 import AddTheaterPage from "../pages/owner/AddTheaterPage";
-import ManageTheaterPage from "../pages/owner/ManageTheaterPage";
 import MoviePage from "../pages/admin/MoviePage";
 import UserPage from "../pages/admin/UserPage";
 import TransactionPage from "../pages/admin/TransactionPage";
@@ -17,6 +16,7 @@ import ApproveTheaterPage from "../pages/admin/ApproveTheaterPage";
 import AllMoviePage from "../pages/owner/AllMoviePage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";;
 import ShowPage from "../pages/owner/ShowPage";
+import MyTheaterPage from "../pages/owner/MyTheaterPage";
 
 
 export const routes = [
@@ -82,8 +82,8 @@ export const routes = [
        element: <OwnerRoutes><AddTheaterPage/></OwnerRoutes> 
       },
       {
-        path: "/theaters/manage",
-        element: <OwnerRoutes><ManageTheaterPage/></OwnerRoutes>
+        path: "/theaters/my-theaters",
+        element: <OwnerRoutes><MyTheaterPage/></OwnerRoutes>
       },
       {
         path: "/shows",
