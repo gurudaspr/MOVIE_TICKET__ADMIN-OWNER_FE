@@ -5,7 +5,6 @@ import LoginPage from "../pages/auth/LoginPage";
 import SignupPage from "../pages/auth/SignupPage";
 import AdminRoutes from "../protectRoute/AdminRoutes";
 import OwnerRoutes from "../protectRoute/OwnerRoutes";
-import OwnerDashboard from "../components/owner/OwnerDashboard";
 import OwnerLayout from "../layouts/OwnerLayout";
 import AddTheaterPage from "../pages/owner/AddTheaterPage";
 import MoviePage from "../pages/admin/MoviePage";
@@ -17,6 +16,7 @@ import AllMoviePage from "../pages/owner/AllMoviePage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";;
 import ShowPage from "../pages/owner/ShowPage";
 import MyTheaterPage from "../pages/owner/MyTheaterPage";
+import OwnerDashboardPage from "../pages/owner/OwnerDashboardPage";
 
 
 export const routes = [
@@ -72,7 +72,7 @@ export const routes = [
     children : [
       {
         path: "/ownerDashboard",
-        element:<OwnerRoutes><OwnerDashboard /></OwnerRoutes>
+        element:<OwnerRoutes><OwnerDashboardPage /></OwnerRoutes>
       },
       {
         path: "/movie-list",

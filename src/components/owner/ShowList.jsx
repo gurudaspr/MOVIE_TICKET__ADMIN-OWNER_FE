@@ -21,9 +21,16 @@ const ShowList = () => {
                 const res = await axios.get(`${baseUrl}/api/owner/get-shows`, { withCredentials: true });
                 setShows(res.data);
                 setFilteredShows(res.data);
+                console.log(res.data);
             } catch (error) {
                 console.log('Error fetching shows:', error.message);
-                toast.error('Failed to fetch shows');
+               if(error.response.status === 404) {
+                   toast.error("No theaters found for this owner")
+               }else{
+                   toast.error('Failed to fetch shows');
+                   
+               }
+                
             }
         };
 

@@ -2,22 +2,31 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import { Link } from 'react-router-dom';
+import { MyTheatersSkeleton } from '../../ui/Skeletons';
+import toast from 'react-hot-toast';
 
 export default function MyTheaterList() {
   const [theaters, setTheaters] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTheaters = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(`${baseUrl}/api/owner/my-theaters`, { withCredentials: true });
         setTheaters(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching theaters:', error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchTheaters();
   }, []);
+
+  if (loading) {
+    return <MyTheatersSkeleton />;
+  }
 
   return (
     <div className='min-h-screen mx-5 my-8 animate-fade-in'>
@@ -45,7 +54,7 @@ export default function MyTheaterList() {
           </div>
         ))
       ) : (
-        <p>No theaters available.</p>
+        <div className="text-center lg:text-3xl">No theaters available</div>
       )}
     </div>
   );
