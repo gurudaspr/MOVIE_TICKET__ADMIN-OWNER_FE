@@ -13,7 +13,7 @@ const movieSchema = Yup.object().shape({
   title: Yup.string().required("Enter movie title"),
   duration: Yup.number().typeError("Duration must be a number").required("Enter movie duration in minutes"),
   genre: Yup.string().required("Enter movie genre"),
-  description: Yup.string().required("Enter movie description").max(200),
+  description: Yup.string().required("Enter movie description").max(400),
   language: Yup.string().required("Enter movie language"),
   image: Yup.mixed().required("Upload movie image"),
   releaseDate: Yup.date().required('Release date is required'),
