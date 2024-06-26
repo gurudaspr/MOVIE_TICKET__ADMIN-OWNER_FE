@@ -45,9 +45,8 @@ function TotalSeatSoldChart() {
       theaterData[theaterId].data[dateIndex] = (theaterData[theaterId].data[dateIndex] || 0) + item.count;
     });
 
-    const labels = [...new Set(Object.values(theaterData).flatMap(td => td.labels))].sort(
-      (a, b) => new Date(a) - new Date(b)
-    );
+    // Ensure labels include the last 7 days
+    const labels = generateDateLabels(7);
 
     const colorPalette = [
       'rgba(255, 99, 132, 0.2)',
@@ -81,6 +80,17 @@ function TotalSeatSoldChart() {
     }));
 
     setChartData({ labels, datasets });
+  };
+
+  const generateDateLabels = (days) => {
+    const labels = [];
+    const today = new Date();
+    for (let i = days - 1; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(today.getDate() - i);
+      labels.push(date.toLocaleDateString('default', { month: 'short', day: 'numeric' }));
+    }
+    return labels;
   };
 
   const options = {
