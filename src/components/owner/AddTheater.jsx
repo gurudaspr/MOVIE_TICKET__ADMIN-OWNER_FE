@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { set } from 'date-fns';
 
 const theaterSchema = Yup.object().shape({
     name: Yup.string().required('Theater Name is required'),
@@ -20,6 +22,8 @@ export default function AddTheater() {
     const [seatingPattern, setSeatingPattern] = useState([]);
     const generatedSeats = useRecoilValue(generatedSeatsState);
     const setGeneratedSeats = useSetRecoilState(generatedSeatsState);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(theaterSchema),
@@ -39,13 +43,20 @@ export default function AddTheater() {
             selectedSeats: generatedSeats, 
         };
         try {
+            setLoading(true)
             const response = await axios.post(`${baseUrl}/api/owner/add-theater`, formData,{ withCredentials: true });
             toast.success(response.data.message);
             setGeneratedSeats([]);
+            navigate('/theaters/my-theaters')
+        
         } catch (error) {
             console.error('Error adding theater:', error.message);
             toast.error('Failed to add theater.');
+            setLoading(false)
         }
+    finally {
+        setLoading(false);
+    }
     };
 
     return (
@@ -93,7 +104,7 @@ export default function AddTheater() {
                             </div>
                         </div>
                         <div className="text-center px-2 mt-2 ">
-                            <button type="submit" className="btn btn-primary">Add Theater</button>
+                            <button type="submit" className="btn btn-primary"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Add Theater"}</button>
                         </div>
                     </div>
                 </form>
