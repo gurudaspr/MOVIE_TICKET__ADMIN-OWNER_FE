@@ -91,7 +91,7 @@ export default function AddTheater() {
                                 <div className="collapse-title bg-primary text-primary-content peer-checked:bg-base-100 rounded-2xl">
                                     Generate Seating Pattern
                                 </div>
-                                <div className="collapse-content bg-base-200 border border-primary rounded-lg my-3 overflow-x-auto">
+                                <div className="collapse-content bg-base-200 border border-primary rounded-lg my-3 overflow-x-auto ">
                                     <SeatingPatternGenerator
                                         rows={rows}
                                         setRows={setRows}

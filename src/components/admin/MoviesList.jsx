@@ -63,8 +63,8 @@ console.log(movies, 'Movies List');
   };
 
   return (
-    <div className="container mx-auto my-8 animate-fade-in-down">
-      <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
+    <div className="container mx-auto my-8 ">
+      <div className="card w-full p-6 bg-base-200 shadow-xl mt-6 animate-fade-in-down">
         <div className="card-title flex items-center justify-between">
           <h2 className="text-xl font-semibold">Movies</h2>
           <button className="btn btn-success text-primary-content w-32" onClick={() => handleOpenModal()}>Add</button>
