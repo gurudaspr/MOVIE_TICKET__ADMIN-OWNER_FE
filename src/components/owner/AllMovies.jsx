@@ -73,9 +73,9 @@ export default function AllMovies() {
                   <td>{movie.language}</td>
                   <td>{movie.duration} mins</td>
                   <td>
-                    <Link   className="btn btn-success btn-sm text-primary-content" >
+                    {/* <Link   className="btn btn-success btn-sm text-primary-content" >
                       Add Show
-                    </Link>
+                    </Link> */}
                   </td>
                 </tr>
               ))}

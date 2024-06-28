@@ -102,9 +102,6 @@ console.log(movies, 'Movies List');
                   <td>{movie.language}</td>
                   <td>{movie.duration} mins</td>
                   <td>
-                    <button className="text-2xl text-info hover:animate-swing ease-in-out"><FaEdit /></button>
-                  </td>
-                  <td>
                     <button className="text-2xl text-error hover:animate-swing ease-in-out" onClick={() => handleDelete(movie._id)}>
                       <BsFillTrash3Fill className="w-8" />
                     </button>
