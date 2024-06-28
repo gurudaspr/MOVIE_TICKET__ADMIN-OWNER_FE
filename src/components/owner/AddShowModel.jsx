@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -21,16 +21,16 @@ const showSchema = Yup.object().shape({
         .required('Date and time is required')
 });
 
-const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
+const AddShowModel = ({ isOpen, onClose, refreshShows, selectedMovieId }) => {
     const [movies, setMovies] = useState([]);
     const [theaters, setTheaters] = useState([]);
     const [minDate, setMinDate] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { register, handleSubmit, control, watch, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, control, reset, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(showSchema)
     });
 
-    const selectedMovieId = watch('movieId');
+    const selectedMovie = useWatch({ control, name: 'movieId' });
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -58,13 +58,23 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
     }, []);
 
     useEffect(() => {
+        if (selectedMovie) {
+            const movie = movies.find(movie => movie._id === selectedMovie);
+            if (movie) {
+                setMinDate(new Date(movie.releaseDate));
+            }
+        }
+    }, [selectedMovie, movies]);
+
+    useEffect(() => {
         if (selectedMovieId) {
             const selectedMovie = movies.find(movie => movie._id === selectedMovieId);
             if (selectedMovie) {
                 setMinDate(new Date(selectedMovie.releaseDate));
+                setValue('movieId', selectedMovieId);
             }
         }
-    }, [selectedMovieId, movies]);
+    }, [selectedMovieId, movies, setValue]);
 
     const onSubmit = async (data) => {
         try {
@@ -85,7 +95,6 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                 toast.success("Show added successfully!");
                 reset();
                 onClose();
-                // Refresh shows after adding a new show
                 refreshShows();
             } else {
                 toast.error(response.data.message || "Failed to add show");
@@ -120,7 +129,8 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                                     <select
                                         id="movieId"
                                         {...register('movieId')}
-                                        className={`select select-bordered select-primary w-full ${errors.movieId ? 'border-red-500' : ''}`}
+                                        className={`select select-bordered select-primary w-full ${errors.movieId ? 'border-error' : ''}`}
+                                        disabled={!!selectedMovieId}
                                     >
                                         <option value="">Select a movie</option>
                                         {movies.map(movie => (
@@ -136,7 +146,7 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                                     <select
                                         id="theaterId"
                                         {...register('theaterId')}
-                                        className={`select select-bordered select-primary w-full ${errors.theaterId ? 'border-red-500' : ''}`}
+                                        className={`select select-bordered select-primary w-full ${errors.theaterId ? 'border-error' : ''}`}
                                     >
                                         <option value="">Select a theater</option>
                                         {theaters.map(theater => (
@@ -155,7 +165,7 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                                             id="price"
                                             placeholder="Ticket Price"
                                             {...register('price')}
-                                            className={`input input-bordered input-primary w-full ${errors.price ? 'border-red-500' : ''}`}
+                                            className={`input input-bordered input-primary w-full ${errors.price ? 'border-error' : ''}`}
                                         />
                                         {errors.price && <p className="text-left text-error block text-sm mt-1 ml-2">{errors.price.message}</p>}
                                     </div>
@@ -166,7 +176,7 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                                             name="dateTime"
                                             render={({ field }) => (
                                                 <DatePicker
-                                                    disabled={!selectedMovieId}
+                                                    disabled={!selectedMovie}
                                                     selected={field.value}
                                                     onChange={field.onChange}
                                                     showTimeSelect
@@ -186,7 +196,7 @@ const AddShowModel = ({ isOpen, onClose, refreshShows }) => {
                                 </div>
                                 <div className="text-center px-2 mt-2">
                                     <button type="submit" className="btn btn-primary" disabled={loading}>
-                                        {loading ? <span className='loading loading-spinner bg-primary'></span> : "Add Movie"}
+                                        {loading ? <span className='loading loading-spinner bg-primary'></span> : "Add Show"}
                                     </button>
                                 </div>
                             </div>

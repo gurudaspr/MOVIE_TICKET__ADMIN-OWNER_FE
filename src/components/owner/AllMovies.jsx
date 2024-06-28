@@ -3,14 +3,13 @@ import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import { format } from 'date-fns';
 import { toast } from 'react-hot-toast';
-import Modal from '../admin/ConfirmModel';
-import { FaEdit } from "react-icons/fa";
-import { BsFillTrash3Fill } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import AddShowModel from './AddShowModel';
 
 export default function AllMovies() {
   const [movies, setMovies] = useState([]);
   const [searchMovie, setSearchMovie] = useState('');
+  const [showModel, setShowModel] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null); 
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -27,11 +26,14 @@ export default function AllMovies() {
   const filteredMovies = movies.filter(movie =>
     movie.title.toLowerCase().includes(searchMovie.toLowerCase())
   );
-
+  const handleShowModal = (movieId) => {
+    setSelectedMovieId(movieId);
+    setShowModel(true); 
+  };
 
   return (
-    <div className="container mx-auto my-8 animate-fade-in-down">
-      <div className="card w-full p-6 bg-base-200 shadow-xl mt-6 ">
+    <div className="container mx-auto my-8 ">
+      <div className="card w-full p-6 bg-base-200 shadow-xl mt-6  animate-fade-in-down">
       <div className="card-title flex items-center justify-between">
         <h2 className="text-xl font-semibold">Movies</h2>
         <input className='input input-bordered input-sm  '
@@ -73,16 +75,28 @@ export default function AllMovies() {
                   <td>{movie.language}</td>
                   <td>{movie.duration} mins</td>
                   <td>
-                    {/* <Link   className="btn btn-success btn-sm text-primary-content" >
+                  <button
+                      className="btn btn-success btn-sm text-primary-content"
+                      onClick={() => handleShowModal(movie._id)} 
+                    >
                       Add Show
-                    </Link> */}
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      </div>  
+      </div>
+      <>
+      <AddShowModel
+        isOpen={showModel}
+        onClose={() => setShowModel(false)}
+        refreshShows={() => {
+        }}
+        selectedMovieId={selectedMovieId}
+      />
+      </>  
     </div>
   );
 }

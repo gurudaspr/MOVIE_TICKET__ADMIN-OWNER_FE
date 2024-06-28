@@ -17,7 +17,7 @@ const theaterSchema = Yup.object().shape({
 });
 
 export default function AddTheater() {
-    const [rows, setRows] = useState(3);
+    const [rows, setRows] = useState(5);
     const [columns, setColumns] = useState(10);
     const [seatingPattern, setSeatingPattern] = useState([]);
     const generatedSeats = useRecoilValue(generatedSeatsState);

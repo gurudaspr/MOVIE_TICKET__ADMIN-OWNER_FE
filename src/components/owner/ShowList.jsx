@@ -96,8 +96,8 @@ const ShowList = () => {
   };
 
     return (
-        <div className="container mx-auto my-8 animate-fade-in-down">
-            <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
+        <div className="container mx-auto my-8 ">
+            <div className="card w-full p-6 bg-base-200 shadow-xl mt-6 animate-fade-in-down">
                 <div className="card-title flex  items-center justify-between">
                     <h2 className="text-xl font-semibold">Shows</h2>
                     <div className="flex items-center gap-2">
