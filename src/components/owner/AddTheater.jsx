@@ -60,7 +60,7 @@ export default function AddTheater() {
     };
 
     return (
-        <div className="min-h-screen bg-base-100 flex flex-col lg:justify-start pt-20 items-center animate-fade-in-down">
+        <div className="min-h-screen bg-base-100 flex flex-col lg:justify-start pt-20 items-center animate-fade-in">
             <div className='bg-base-200 p-3 rounded-lg w-[100%] md:w-[100%] lg:w-[100%] xl:w-[80%] '>
                 <h3 className="font-bold text-lg lg:text-3xl text-center">ADD THEATER</h3>
                 <form onSubmit={handleSubmit(onSubmit)}>
