@@ -166,8 +166,9 @@ const ShowList = () => {
                                         </div>
                                     </td>
                                     <td>{show.theaterName}</td>
+                                    {showDate =  subHours(subMinutes(showDate, 30), 5)}
                                     <td>{format(new Date(show.showDate), 'dd MMMM yyyy')}</td>
-                                    <td>{format(subHours(subMinutes(new Date(show.showDate), 30), 5), 'h:mm aa')}</td>
+                                    <td>{format(adjustedDate, 'h:mm aa')}</td>
                                     <td>{show.price}</td>
                                 </tr>
                             ))}
