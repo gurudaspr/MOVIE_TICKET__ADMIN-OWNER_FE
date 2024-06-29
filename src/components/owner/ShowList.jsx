@@ -56,7 +56,10 @@ const ShowList = () => {
         }
 
         if (dateFilter) {
-            filtered = filtered.filter(show => format(new Date(show.showDate), 'yyyy-MM-dd') === dateFilter);
+            filtered = filtered.filter(show => {
+                const adjustedDate = subMinutes(subHours(new Date(show.showDate), 5), 30);
+                return format(adjustedDate, 'yyyy-MM-dd') === dateFilter;
+            });
         }
 
         if (movieSearch) {
