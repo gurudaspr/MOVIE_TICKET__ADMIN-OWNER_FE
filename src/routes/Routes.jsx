@@ -17,6 +17,7 @@ import AdminDashboardPage from "../pages/admin/AdminDashboardPage";;
 import ShowPage from "../pages/owner/ShowPage";
 import MyTheaterPage from "../pages/owner/MyTheaterPage";
 import OwnerDashboardPage from "../pages/owner/OwnerDashboardPage";
+import ErrorPage from "../protectRoute/ErrorPage";
 
 
 export const routes = [
@@ -34,6 +35,10 @@ export const routes = [
       {
         path: "/login",
         element: <LoginPage />
+      },
+      {
+        path : '*',
+        element : <ErrorPage/>
       }
 
     ]
