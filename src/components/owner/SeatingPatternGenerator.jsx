@@ -61,7 +61,7 @@ const SeatingPatternGenerator = ({ rows, setRows, columns, setColumns, seatingPa
         }
         toast.success('Seating Pattern Generated Successfully');
         setGeneratedSeats(selectedSeats);
-        console.log(selectedSeats, 'Selected Seats');
+        
     };
 
     const handleSelect = (e) => {

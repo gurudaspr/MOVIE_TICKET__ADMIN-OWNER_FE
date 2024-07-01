@@ -1,21 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ToggleTheme from '../../ui/ToggleTheme';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import { useRecoilValue } from 'recoil';
 import { pageTitleState } from '../../store/usePageTitleAtom';
+import toast from 'react-hot-toast';
 
 export default function OwnerNavbar() {
     const pageTitle = useRecoilValue(pageTitleState);
+    const navigate = useNavigate();
     const openDrawer = () => {
         document.getElementById('left-sidebar-drawer').click();
     };
 
     const handleLogout = () => {
+        try {
         axios.post(`${baseUrl}/api/owner/logout`,'', { withCredentials: true })
+        toast.success('Logged out successfully');
+    
+          navigate('/login', { replace: true });
+        } catch (error) {
+          console.error('Error logging out:', error);
+        }
     }
-
     return (
         <div className="navbar sticky top-0 bg-base-200 z-10">
             <div className="navbar-start">
@@ -30,7 +38,7 @@ export default function OwnerNavbar() {
             </div>
             <div className="navbar-end gap-3">
                 <ToggleTheme />
-                <Link to="/signup" onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover">LOGOUT</Link>
+                <button onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover">LOGOUT</button>
                 
             </div>
         </div>

@@ -31,12 +31,12 @@ export default function AddTheater() {
 
     
     const onSubmit = async (data) => {
-        console.log(generatedSeats, 'Generated Seats');
+       
         if (generatedSeats.length === 0) {
             toast.error('Please generate seating pattern.');
             return;
         }
-        console.log(generatedSeats, 'Generated Seats');
+        
         const formData = {
             name: data.name,
             location: data.location,

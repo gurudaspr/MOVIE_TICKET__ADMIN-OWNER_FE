@@ -12,7 +12,6 @@ export default function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [deleteMovieId, setDeleteMovieId] = useState(null);
   const [movieModel, setMovieModel] = useState(false);
-console.log(movies, 'Movies List');
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -28,7 +27,7 @@ console.log(movies, 'Movies List');
 
   const handleDelete = (movieId) => {
     setDeleteMovieId(movieId);
-    console.log(movieId, 'Selected Movie ID for Deletion');
+ 
   };
 
   const confirmDelete = async () => {

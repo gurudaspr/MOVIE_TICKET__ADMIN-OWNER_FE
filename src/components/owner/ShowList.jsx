@@ -21,7 +21,6 @@ const ShowList = () => {
                 const res = await axios.get(`${baseUrl}/api/owner/get-shows`, { withCredentials: true });
                 setShows(res.data);
                 setFilteredShows(res.data);
-                console.log(res.data);
             } catch (error) {
                 console.log('Error fetching shows:', error.message);
                if(error.response.status === 404) {
@@ -157,7 +156,7 @@ const ShowList = () => {
                         {filteredShows.map((show) => {
                                 const adjustedDate = subMinutes(subHours(new Date(show.showDate), 5), 30);
                                 return (
-                                    <tr key={show._id} className="border-t border-base-100">
+                                    <tr key={show.id} className="border-t border-base-100">
                                         <td>
                                             <div className="flex items-center gap-3">
                                                 <div className="avatar">

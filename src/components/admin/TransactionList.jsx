@@ -14,7 +14,7 @@ const TransactionsList = () => {
       try {
         const response = await axios.get(`${baseUrl}/api/admin/transactions`, { withCredentials: true });
         setTransactions(response.data);
-        console.log(response.data, 'Transactions');
+    
       } catch (error) {
         console.error('Error fetching transactions:', error.message);
         toast.error('Failed to fetch transactions');

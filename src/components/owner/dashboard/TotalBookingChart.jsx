@@ -17,7 +17,6 @@ function TotalBookngChart() {
     try {
       const response = await axios.get(`${baseUrl}/api/owner/total-bookings`,{withCredentials:true});
       const data = response.data;
-      console.log(data, 'data');
       formatChartData(data);
 
     } catch (error) {

@@ -15,7 +15,6 @@ const OwnerRoutes = ({ children }) => {
           `${baseUrl}/api/owner/check-owner`, { withCredentials: true }
         );
         const data = res.data;
-        console.log('datauser', data);
         if (data.success) {
             setIsAuthenticated(true);
           

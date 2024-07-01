@@ -47,7 +47,6 @@ export default function AddEditModel({ isOpen, onClose, addMovie }) {
       });
 
       toast.success('Movie added successfully');
-      console.log('Added movie:', response.data);
       addMovie(response.data.movie);
       reset();
       onClose();

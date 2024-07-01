@@ -32,7 +32,7 @@ export default function MyTheaterList() {
     <div className='min-h-screen mx-5 my-8 '>
       {theaters.length > 0 ? (
         theaters.map((theater) => (
-          <div key={theater.id} className="bg-base-200 rounded-lg shadow-md p-6 my-4 grid grid-cols-3 gap-4 text-center">
+          <div key={theater._id} className="bg-base-200 rounded-lg shadow-md p-6 my-4 grid grid-cols-3 gap-4 text-center">
             <div className="flex flex-col items-start">
               <h3 className="text-sm font-medium">Name</h3>
               <p className="mt-1 text-xl font-semibold">{theater.name.toUpperCase()}</p>

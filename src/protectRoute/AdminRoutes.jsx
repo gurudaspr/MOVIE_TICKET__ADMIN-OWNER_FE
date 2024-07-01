@@ -15,7 +15,6 @@ const AdminRoutes = ({ children }) => {
           `${baseUrl}/api/admin/check-admin`, { withCredentials: true }
         );
         const data = res.data;
-        console.log('datauser', data);
         if (data.success) {
             setIsAuthenticated(true);
           } else {

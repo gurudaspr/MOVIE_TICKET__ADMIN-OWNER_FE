@@ -17,7 +17,6 @@ function NewUsersChart() {
     try {
       const response = await axios.get(`${baseUrl}/api/admin/new-registrations`,{withCredentials:true});
       const data = response.data;
-      console.log(data, 'data');
       formatChartData(data);
 
     } catch (error) {
