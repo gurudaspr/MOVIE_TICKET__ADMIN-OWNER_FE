@@ -34,7 +34,7 @@ export default function TransactionStats() {
       <div className="stat">
         <div className="stat-title text-neutral-content">TOTAL AMOUNT</div>
         <div className="stat-value text-success">
-          ₹ {transactionData.loading ? <CountUp end={10000} duration={15} /> : <CountUp end={transactionData.totalAmount} duration={1} />}
+          ₹ {transactionData.loading ? <CountUp end={500} duration={15} /> : <CountUp end={transactionData.totalAmount} duration={1} />}
         </div>
         <div className="stat-desc mt-2">last 100 payments</div>
         <div className="stat-actions">
