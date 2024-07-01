@@ -33,28 +33,30 @@ export default function ApproveTheaters() {
             console.error('Error approving theater:', error);
         }
     }
+    
 
     return (
         <div className="container mx-auto my-8 animate-fade-in-down">
-            <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
-                <div className="card-title flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Approve</h2>
-                    <input
-                        className='input input-bordered input-sm'
-                        placeholder='Search Theater'
-                        value={searchTheater}
-                        onChange={e => setSearchTheater(e.target.value)}
-                    />
-                </div>
-                <div className="divider mt-2"></div>
-                <div className="h-full min-h-screen overflow-x-auto bg-base-200 rounded-xl">
+        <div className="card w-full p-6 bg-base-200 shadow-xl mt-6">
+            <div className="card-title flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Approve Theaters</h2>
+                <input
+                    className='input input-bordered input-sm'
+                    placeholder='Search Theater'
+                    value={searchTheater}
+                    onChange={e => setSearchTheater(e.target.value)}
+                />
+            </div>
+            <div className="divider mt-2"></div>
+            <div className="h-full min-h-screen overflow-x-auto bg-base-200 rounded-xl">
+                {filteredTheaters.length > 0 ? (
                     <table className="table w-full">
                         <thead className='text-lg'>
                             <tr>
-                                <th >Theater Name</th>
-                                <th >Owner Name</th>
-                                <th >Location</th>
-                                <th >Registered On</th>
+                                <th>Theater Name</th>
+                                <th>Owner Name</th>
+                                <th>Location</th>
+                                <th>Registered On</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -62,24 +64,29 @@ export default function ApproveTheaters() {
                             {filteredTheaters.map((theater) => (
                                 <tr key={theater._id} className='border-t border-base-100'>
                                     <td>
-                                        <div className=' w-auto h-12 flex items-center'>
+                                        <div className='w-auto h-12 flex items-center'>
                                             <p className="font-bold">{theater.name.toUpperCase()}</p>
                                         </div>
                                     </td>
-                                    <td >{theater.owner.name}</td>
-                                    <td >{theater.location}</td>
-                                    <td >{format(new Date(theater.createdAt), 'dd MMMM yyyy')}</td>
+                                    <td>{theater.owner.name}</td>
+                                    <td>{theater.location}</td>
+                                    <td>{format(new Date(theater.createdAt), 'dd MMMM yyyy')}</td>
                                     <td>
-                                        <button className=" btn  btn-success text-primary-content " onClick={() => handleApprove(theater._id)}>
-                                           Approve
+                                        <button className="btn btn-success text-primary-content" onClick={() => handleApprove(theater._id)}>
+                                            Approve
                                         </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                </div>
+                ) : (
+                    <div className="text-center text-xl mt-6">
+                        No theaters for approval.
+                    </div>
+                )}
             </div>
         </div>
+    </div>
     )
 }
