@@ -15,11 +15,11 @@ const OwnerRoutes = ({ children }) => {
           `${baseUrl}/api/owner/check-owner`, { withCredentials: true }
         );
         const data = res.data;
-        if (data.success) {
+        if (data.success === true) {
             setIsAuthenticated(true);
           
           } else {
-            navigate("/ownerDashboard", { replace: true });
+            navigate("/login", { replace: true });
           }
         } catch (error) {
           console.error("Error occurred while checking :", error);
