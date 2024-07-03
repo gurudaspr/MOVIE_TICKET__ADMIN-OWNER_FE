@@ -15,10 +15,10 @@ const AdminRoutes = ({ children }) => {
           `${baseUrl}/api/admin/check-admin`, { withCredentials: true }
         );
         const data = res.data;
-        if (data.success === true) { 
+        if (data.success) {
             setIsAuthenticated(true);
           } else {
-            navigate("/login", { replace: true });
+            navigate("/adminDashboard", { replace: true });
           }
         } catch (error) {
           console.error("Error occurred while checking :", error);
