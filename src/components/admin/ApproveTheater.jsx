@@ -26,7 +26,7 @@ export default function ApproveTheaters() {
     );
     const handleApprove = async (id) => {
         try {
-            await axios.put(`${baseUrl}/api/admin/approve-theater/${id}`);
+            await axios.put(`${baseUrl}/api/admin/approve-theater/${id}`, {}, { withCredentials: true });
             setTheaters(theaters.filter(theater => theater._id !== id));
             toast.success('Theater approved successfully');
         } catch (error) {
