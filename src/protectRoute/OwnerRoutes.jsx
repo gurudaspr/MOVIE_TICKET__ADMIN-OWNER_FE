@@ -17,9 +17,6 @@ const OwnerRoutes = ({ children }) => {
         const data = res.data;
         if (data.success === true) {
             setIsAuthenticated(true);
-          
-          } else {
-            navigate("/login", { replace: true });
           }
         } catch (error) {
           console.error("Error occurred while checking :", error);
