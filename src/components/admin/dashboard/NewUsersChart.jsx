@@ -15,7 +15,7 @@ function NewUsersChart() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/admin/new-registrations`,{withCredentials:true});
+      const response = await axios.get(`${baseUrl}/api/admin/new-registrations`, { withCredentials: true });
       const data = response.data;
       formatChartData(data);
 
@@ -25,7 +25,7 @@ function NewUsersChart() {
   };
 
   const formatChartData = (apiData) => {
- 
+
     const counts = Array.from({ length: 12 }, () => 0);
 
     apiData.forEach(item => {
@@ -33,17 +33,17 @@ function NewUsersChart() {
       counts[monthIndex] = item.count;
     });
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth(); 
+    const currentMonth = currentDate.getMonth();
 
     const labels = counts.slice(0, currentMonth + 1).map((_, index) => {
       const date = new Date(currentDate.getFullYear(), index, 1);
       return date.toLocaleString('default', { month: 'short' });
     });
-//     const currentDate = new Date();
-// const labels = counts.map((_, index) => {
-// const date = new Date(currentDate.getFullYear(), index, 1);
-// return date.toLocaleString('default', { month: 'short' });
-// });
+    //     const currentDate = new Date();
+    // const labels = counts.map((_, index) => {
+    // const date = new Date(currentDate.getFullYear(), index, 1);
+    // return date.toLocaleString('default', { month: 'short' });
+    // });
     const formattedData = {
       labels: labels,
       datasets: [
@@ -71,11 +71,11 @@ function NewUsersChart() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   return (
-    
+
     <div className="rounded-lg shadow-lg  bg-base-200   h-auto text-neutral-content p-4 animate-slide-in-left">
       <div className="card-title flex items-center justify-center">
-          <h2 className="stat-title   text-neutral-content ">NEW USERS {year}</h2>
-          </div>
+        <h2 className="stat-title   text-neutral-content ">NEW USERS {year}</h2>
+      </div>
       {chartData ? <Bar options={options} data={chartData} /> : <p>Loading chart...</p>}
     </div>
   );

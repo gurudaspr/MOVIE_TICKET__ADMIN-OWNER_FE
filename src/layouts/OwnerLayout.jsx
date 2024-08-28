@@ -4,7 +4,7 @@ import OwnerSidebar from '../components/owner/OwnerSidebar';
 import OwnerContent from '../pages/owner/OwnerContent';
 import OwnerNavbar from '../components/owner/OwnerNavbar';
 
-const AdminLayout = () => {
+const OwnerLayout = () => {
   return (
     <>
 
@@ -23,4 +23,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default OwnerLayout;

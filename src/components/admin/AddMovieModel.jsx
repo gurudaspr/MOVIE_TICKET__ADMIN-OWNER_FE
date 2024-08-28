@@ -36,7 +36,7 @@ export default function AddEditModel({ isOpen, onClose, addMovie }) {
       formData.append('language', data.language);
       formData.append('duration', data.duration);
       formData.append('description', data.description);
-      formData.append('releaseDate', format(new Date(data.releaseDate), 'yyyy-MM-dd'));
+      formData.append('releaseDate', format(new Date(), 'yyyy-MM-dd'));
       formData.append('image', data.image[0]);
 
       const response = await axios.post(`${baseUrl}/api/admin/add-movie`, formData, {

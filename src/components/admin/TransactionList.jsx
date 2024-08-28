@@ -13,7 +13,7 @@ const TransactionsList = () => {
     const fetchTransactions = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/admin/transactions`, { withCredentials: true });
-        setTransactions(response.data);
+        setTransactions(response.data.totalPayments);  // Assuming totalPayments is the array of transactions
     
       } catch (error) {
         console.error('Error fetching transactions:', error.message);
@@ -38,8 +38,6 @@ const TransactionsList = () => {
                 <th>Transaction Id</th>
                 <th>Customer Name</th>
                 <th>Email</th>
-                <th>Contact Number</th>
-                <th>Payment Method</th>
                 <th>Amount</th>
                 <th>Transaction Date</th>
                 <th>Status</th>
@@ -47,25 +45,21 @@ const TransactionsList = () => {
             </thead>
             <tbody>
               {transactions.map((transaction) => (
-                <tr key={transaction.id} className="border-t border-base-100">
+                <tr key={transaction.payment_id} className="border-t border-base-100">
                   <td>
-                    <div className=' w-auto h-12 flex items-center'>
-                      <p className="font-bold">{transaction.id}</p>
+                    <div className='w-auto h-12 flex items-center'>
+                      <p className="font-bold">{transaction.payment_id}</p>
                     </div>
                   </td>
-                  <td>{transaction.notes && transaction.notes.customer_name}</td>
-                  <td>{transaction.email}</td>
-                  <td>{transaction.contact}</td>
-                  <td>{transaction.method}</td>
-                  <td>{transaction.amount / 100} INR</td>
-                  <td>{format(new Date(transaction.created_at * 1000), 'dd MMMM yyyy')}</td>
+                  <td>{transaction.user_id?.name.toUpperCase() || 'N/A'}</td> {/* Display customer name */}
+                  <td>{transaction.user_id?.email || 'N/A'}</td> {/* Display email */}
+                  <td>{transaction.amount} INR</td>
+                  <td>{format(new Date(transaction.createdAt), 'dd MMMM yyyy')}</td> {/* Format transaction date */}
                   <td>
                     <span
                       className={`badge badge-lg text-primary-content ${
-                        transaction.status === 'captured'
+                        transaction.status === 'success'
                           ? 'bg-success'
-                          : transaction.status === 'created'
-                          ? 'bg-warning'
                           : transaction.status === 'failed'
                           ? 'bg-error'
                           : 'bg-base-300'
